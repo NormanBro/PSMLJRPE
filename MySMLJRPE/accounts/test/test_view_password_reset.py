@@ -10,7 +10,6 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.forms import SetPasswordForm
 
-
 class PasswordResetTests(TestCase):
     def setUp(self):
         url = reverse('password_reset')
@@ -140,3 +139,15 @@ class InvalidPasswordResetConfirmTests(TestCase):
         password_reset_url = reverse('password_reset')
         self.assertContains(self.response, 'invalid password reset link')
         self.assertContains(self.response, 'href="{0}"'.format(password_reset_url))
+
+class PasswordResetCompleteTests(TestCase):
+    def setUp(self):
+        url = reverse('password_reset_complete')
+        self.response = self.client.get(url)
+
+    def test_status_code(self):
+        self.assertEquals(self.response.status_code, 200)
+
+    def test_view_function(self):
+        view = resolve('/reset/complete/')
+        self.assertEquals(view.func.view_class, auth_views.PasswordResetCompleteView)
