@@ -13,11 +13,6 @@ def board_topics(request, pk):
 
 def new_topic(request, pk):
     board = get_object_or_404(Board, pk=pk)
-    board = Board.objects.get(pk=pk)
-    return render(request, 'new_topic.html', {'board': board})
-
-def new_topic(request, pk):
-    board = get_object_or_404(Board, pk=pk)
 
     if request.method == 'POST':
         subject = request.POST['subject']
