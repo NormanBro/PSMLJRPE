@@ -2,6 +2,7 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404,redirect
 from django.contrib.auth.models import User
 from .models import Board,Topic,Post
 from .forms import NewTopicForm
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     boards = Board.objects.all()
@@ -12,6 +13,7 @@ def board_topics(request, pk):
     board = Board.objects.get(pk=pk)
     return render(request, 'topics.html', {'board': board})
 
+@login_required
 def new_topic(request, pk):
     board = get_object_or_404(Board, pk=pk)
     user = User.objects.first()  # TODO: get the currently logged in user
