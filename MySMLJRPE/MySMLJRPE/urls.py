@@ -23,7 +23,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^$', views.BoardListView.as_view(), name='home'),
-    url(r'^boards/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
+    url(r'^boards/(?P<pk>\d+)/$', views.TopicListView.as_view(), name='board_topics'),
     url(r'^boards/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
@@ -33,6 +33,7 @@ urlpatterns = [
     
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
         views.PostUpdateView.as_view(), name='edit_post'),
+
 
     #url configurar router email
 
