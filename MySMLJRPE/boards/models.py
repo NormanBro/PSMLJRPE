@@ -19,7 +19,6 @@ class Board(models.Model):
     def get_last_post(self):
         return Post.objects.filter(topic__board=self).order_by('-created_at').first()
 
-
 class Topic(models.Model):
     subject = models.CharField(max_length=255)
     last_updated = models.DateTimeField(auto_now_add=True)
